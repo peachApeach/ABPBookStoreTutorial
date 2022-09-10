@@ -12,6 +12,8 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using BookStore.Books;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace BookStore.EntityFrameworkCore;
 
@@ -50,6 +52,11 @@ public class BookStoreDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+
+    //3. dbContext에 Book Entity 추가
+    public DbSet<Book> Books { get; set; }
+
+
     #endregion
 
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
@@ -81,5 +88,14 @@ public class BookStoreDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        //4. book 엔터티를 데이터베이스 테이블에 매핑
+        builder.Entity<Book>(b =>
+                                {
+                                    b.ToTable(BookStoreConsts.DbTablePrefix + "Books", BookStoreConsts.DbSchema);
+                                    b.ConfigureByConvention();
+                                    b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+                                });
+
     }
 }
