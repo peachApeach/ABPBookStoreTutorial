@@ -3,7 +3,7 @@
   "texts": {
           "Menu:Home": "Home",
           "Welcome": "Welcome",
-          "LongWelcomeMessage": "¾È³ç! Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+          "LongWelcomeMessage": "ï¿½È³ï¿½! Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
           "Menu:BookStore": "Book Store",
           "Menu:Books": "Books",
           "Actions": "Actions",
