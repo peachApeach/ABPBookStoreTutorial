@@ -4,6 +4,7 @@
 //시작 템플릿은 AutoMapper 라이브러리를 개체 매핑 공급자로 사용
 
 
+using BookStore.Permissions;
 using System;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -22,7 +23,13 @@ namespace BookStore.Books
 
         public BookAppService(IRepository<Book, Guid> repository) : base(repository)
         {
-
+            //apb crud
+            //안전한 http api 
+            GetPolicyName = BookStorePermissions.Books.Default;
+            GetListPolicyName = BookStorePermissions.Books.Default;
+            CreatePolicyName = BookStorePermissions.Books.Create;
+            UpdatePolicyName = BookStorePermissions.Books.Edit;
+            DeletePolicyName = BookStorePermissions.Books.Delete;
         }
     }
 }
