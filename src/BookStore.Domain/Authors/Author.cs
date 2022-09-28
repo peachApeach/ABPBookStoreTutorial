@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Volo.Abp;
 using Volo.Abp.Domain.Enitities.Auditing;
 
-namespace Acme.BookStore.Books
+namespace BookStore.Books
 {
     //FullAuditedAggregateRoot<Guid> : 엔터티를 삭제하면 데이터베이스에서 삭제되지 않고 모든 감사 속성과 함께 삭제된 것으로 표시됨.
     public class Author : FullAuditedAggregateRoot<Guid>
@@ -14,6 +14,7 @@ namespace Acme.BookStore.Books
         public DateTime BirthDate{get;set;}
         public string ShortBio {get;set;}
 
+        //Author 생성자와 ChangeName Method는 internal이므로 도메인 계층에서만 사용 가능
         private Author(){
             //this constructor is for deserialization /ORM purpose
 
