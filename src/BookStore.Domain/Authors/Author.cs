@@ -1,9 +1,9 @@
 using System;
 using JetBrains.Annotations;
 using Volo.Abp;
-using Volo.Abp.Domain.Enitities.Auditing;
+using Volo.Abp.Domain.Entities.Auditing;
 
-namespace BookStore.Books
+namespace BookStore.Authors
 {
     //FullAuditedAggregateRoot<Guid> : 엔터티를 삭제하면 데이터베이스에서 삭제되지 않고 모든 감사 속성과 함께 삭제된 것으로 표시됨.
     public class Author : FullAuditedAggregateRoot<Guid>
@@ -36,7 +36,7 @@ namespace BookStore.Books
         private void SetName([NotNull] string name)
         {
             //Check Class는 메서드 인수를 확인하는 동안 도움이 되는 ABP Framework 유틸리티 클래스 
-            Name = Check.NotNullOrWhiteSpace(name, nameof(name), maxLenght: AuthorConsts.MaxNameLength);
+            Name = Check.NotNullOrWhiteSpace(name, nameof(name), maxLength: AuthorConsts.MaxNameLenght);
         }
 
     }

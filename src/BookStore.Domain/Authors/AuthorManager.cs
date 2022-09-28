@@ -1,10 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using BookStore.Authors;
 using JetBrains.Annotations;
 using Volo.Abp;
-using Volo.Abp.Domain.SErvices;
+using Volo.Abp.Domain.Services;
 
-namespace BookStore.Author
+namespace BookStore.Authors
 {
     //통제된 방식으로 저자를 생성하고 저자의 이름을 변경. 어플리케이션 계층에서 사용
     ///DDD : 도메인 서비스 방법이 꼭 필요한 경우가 아니면 도입하지 말고 몇 가지 핵심 비즈니스 규칙을 수행하십시오. 이 경우, 고유 이름 제약 조건을 강제할 수 있도록 이 서비스가 필요함.
@@ -13,12 +14,12 @@ namespace BookStore.Author
     {
         private readonly IAuthorRepository _authorRepository;
 
-        public AuthorManager(IAuthorRepository authorReoisitory)
+        public AuthorManage(IAuthorRepository authorReoisitory)
         {
             _authorRepository = authorReoisitory;
         }
 
-        public async Task<Author> CreateAsync([NotNull] string name, Datetime birthDate, [CanBeNull] string shirtBio = null)
+        public async Task<Author> CreateAsync([NotNull] string name, DateTime birthDate, [CanBeNull] string shortBio = null)
         {
             Check.NotNullOrWhiteSpace(name, nameof(name));
 
@@ -26,7 +27,7 @@ namespace BookStore.Author
 
             if (existingAuthor != null)
             {
-                throw new AuthorAlreadyExists(name);
+                throw new AuthorAlreadyExistsException(name);
             }
 
             return new Author(GuidGenerator.Create(), name, birthDate, shortBio);
