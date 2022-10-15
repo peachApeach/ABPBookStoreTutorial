@@ -1,0 +1,19 @@
+@page "/authors"
+@using BookStore.authors
+@using BookStore.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inherits BookstroeComponentBase
+@inject IAuthorAppService AuthorAppService
+@inject AbpBlazorMessageLocalizerHelper<BookStoreResource> LH
+
+
+
+<Card>
+    <CardHeader>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is6">
+                <h2>@L["Authors"]</h2>
+            </Column>
+        </Row>
+    </CareHeader>
+</Card>
