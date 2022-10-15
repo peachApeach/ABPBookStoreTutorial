@@ -15,6 +15,7 @@ namespace BookStore {
             //7. automapper 라이브러리를 사용하여 book에 매필하는데 사용
             CreateMap<Book, BookDto>();
             CreateMap<CreateUpdateBookDto, Book>();
+            CreateMap<Author, AuthorDto>();
     
     }
     }

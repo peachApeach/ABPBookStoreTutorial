@@ -19,6 +19,13 @@ public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvide
         bookPermission.AddChild(BookStorePermissions.Books.Edit, L("Permission:Books.Edit"));
         bookPermission.AddChild(BookStorePermissions.Books.Delete, L("Permission:Books.Delete"));
         //default 권한이 선택된 경우에만 하위 권한을 선택할 수 있음
+
+
+        //Add Author Permission
+        var authorspermission = bookStoreGroup.AddPermission(BookStorePermissions.Authors.Default, L("Permission:Authors"));
+        authorspermission.AddChild(BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));
+        authorspermission.AddChild(BookStorePermissions.Authors.Edit, L("Permission:Authors.Edit"));
+        authorspermission.AddChild(BookStorePermissions.Authors.Delete, L("Permission:Authors.Delete"));
     }
 
     private static LocalizableString L(string name)
