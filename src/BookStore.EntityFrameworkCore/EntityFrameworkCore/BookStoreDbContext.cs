@@ -52,9 +52,11 @@ public class BookStoreDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
-
     //3. dbContext에 Book Entity 추가
     public DbSet<Book> Books { get; set; }
+
+    //Author Database 통합속성 추가
+    public DbSet<Author> Authors { get; set; }
 
 
     #endregion
@@ -96,6 +98,16 @@ public class BookStoreDbContext :
                                     b.ConfigureByConvention();
                                     b.Property(x => x.Name).IsRequired().HasMaxLength(128);
                                 });
+
+        //Author DataBase 통합 구현
+        builder.Entity<Author>(b =>
+                                {
+                                    b.tables(BookStoreConsts.DbTablePrefix + "Authors", BookStoreConsts.DbSchema);
+                                    b.ConfigureByConvention();
+                                    b.Property(x => x.Name).IsRequired()            //구성 특성이 필요한지 여부를 지정하는 값을 가져옴
+                                                            .HasMaxLength(AuthorConsts.MaxNameLenght);
+                                    b.HasIndex(x => x.Name);
+                                })
 
     }
 }
