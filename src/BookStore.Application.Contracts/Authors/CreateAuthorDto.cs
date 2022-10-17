@@ -1,16 +1,16 @@
 using System;
-using System.ComponentModel.DataAnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Authors
 {
-    public class createAuthorDto
+    public class CreateAuthorDto
     {
         [Required]
         [StringLength(AuthorConsts.MaxNameLenght)]
         public string Name { get; set; }
 
         [Required]
-        public DataTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string ShortBio { get; set; }
     }

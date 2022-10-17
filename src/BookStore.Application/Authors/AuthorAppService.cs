@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using bookstore.Permissions;
+using BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
@@ -14,17 +14,17 @@ namespace BookStore.Authors
     public class AuthorAppService : BookStoreAppService, IAuthorAppService
     {
         private readonly IAuthorRepository _authorRepository;
-        private readonly AutorManager _authorManager;
+        private readonly AuthorManager _authorManager;
 
-        public AuthorAppService(IAuthorRepository authorRepository, AuthorManage authorManager)
+        public AuthorAppService(IAuthorRepository authorRepository, AuthorManager authorManager)
         {
-            _authorRepository = authorRepository
+            _authorRepository = authorRepository;
             _authorManager = authorManager;
         }
 
-        public Task<AuthorDto. GetAsync(Guid id)
+        public async Task<AuthorDto> GetAsync(Guid id)
         {
-            //단순하 Entity를 EntityMapper로 사용하는 것으로 AutoMapper 구성 필수
+            //단순히 Entity를 EntityMapper로 사용하는 것으로 AutoMapper 구성 필수
             var author = await _authorRepository.GetAsync(id);
             return ObjectMapper.Map<Author, AuthorDto>(author);
             
@@ -40,9 +40,9 @@ namespace BookStore.Authors
 
             //GetListAync는 데이터베이스에서 페이징, 정렬 및 필터링된 작성자 목록을 가져오는 데 사용
             var authors = await _authorRepository.GetListAsync(
-                                                                input.SkipCout,
-                                                                input.MaxReultCount,
-                                                                input.Sortinng,
+                                                                input.SkipCount,
+                                                                input.MaxResultCount,
+                                                                input.Sorting,
                                                                 input.Filter
                                                                 );
 
@@ -53,7 +53,7 @@ namespace BookStore.Authors
             //Authors 목록을 AuthorDtos 목록에 매핑하여 페이지 결과를 반환
             return new PagedResultDto<AuthorDto>(
                                                                     totalCount,
-                                                                    ObjectMapper.Map<Lst<Author>, List<AuthorDto>>(authors)
+                                                                    ObjectMapper.Map<List<Author>, List<AuthorDto>>(authors)
                                                                 );
 
 
@@ -64,6 +64,15 @@ namespace BookStore.Authors
         {
             await _authorRepository.DeleteAsync(id);
         }
-        
+
+        Task<AuthorDto> IAuthorAppService.CreateAsync(CreateAuthorDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IAuthorAppService.UpdateAsync(Guid id, UpdateAuthorDto inout)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
