@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Books;
+using BookStore.Authors;
 
 namespace BookStore {
 

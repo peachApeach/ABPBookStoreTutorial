@@ -13,6 +13,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using BookStore.Books;
+using BookStore.Authors;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace BookStore.EntityFrameworkCore;
@@ -102,12 +103,12 @@ public class BookStoreDbContext :
         //Author DataBase 통합 구현
         builder.Entity<Author>(b =>
                                 {
-                                    b.tables(BookStoreConsts.DbTablePrefix + "Authors", BookStoreConsts.DbSchema);
+                                    b.ToTable(BookStoreConsts.DbTablePrefix + "Authors", BookStoreConsts.DbSchema);
                                     b.ConfigureByConvention();
                                     b.Property(x => x.Name).IsRequired()            //구성 특성이 필요한지 여부를 지정하는 값을 가져옴
                                                             .HasMaxLength(AuthorConsts.MaxNameLenght);
                                     b.HasIndex(x => x.Name);
-                                })
+                                });
 
     }
 }

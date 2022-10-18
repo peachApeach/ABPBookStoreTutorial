@@ -1,4 +1,4 @@
-@page "/authors"
+@page "/Authors"
 @using BookStore.Authors
 @using BookStore.Localization
 @using Volo.Abp.AspNetCore.Components.Web
@@ -19,7 +19,7 @@
                 <Paragraph Aligment="TextAligment.Right">
                     @if(CanCreateAuthor)
                     {
-                        <Button Color="Color.Primary" Clicked="OpenCreateAuthorModel">
+                        <Button Color="Color.Primary" Clicked="OpenCreateAuthorModal">
                             @L["NewAuthor"]
                         </Button>
                     }
@@ -95,7 +95,7 @@
             </ModalHeader>
 
             <ModalBody>
-                <Validations @ref="@CreateValidationRef" Model="@NewAuthor" ValidateOnLoad="fales">
+                <Validations @ref="@CreateValidationsRef" Model="@NewAuthor" ValidateOnLoad="false">
                     <Validation MessageLocalizer="@LH.Localize">
                         <Field>
                             <FieldLabel>@L["Name"]</FieldLabel>
@@ -114,7 +114,7 @@
 
                     <Validation MessageLocalizer="@LH.Localize">
                         <Field>
-                            <FieldLabel>@["ShortBio"]</FieldLabel>
+                            <FieldLabel>@L["ShortBio"]</FieldLabel>
                             <MemoEdit Rows="5" @bind-Text="@NewAuthor.ShortBio">
                                 <Feedback>
                                     <ValidationError />
